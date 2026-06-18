@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DownSosmed — Download Media Sosial</title>
+  <meta name="description" content="DownSosmed - Download video, foto & audio dari TikTok, Instagram, YouTube dan platform lainnya."/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="enhance.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <div id="scrollProgress"></div>
+  <button id="backTop"><i class="fas fa-arrow-up"></i></button>
+
+  <div id="preloader">
+    <div class="pre-icon"><i class="fas fa-download"></i></div>
+    <span class="pre-brand">DownSosmed</span>
+  </div>
+
+  <div id="toast"><i class="fas fa-check-circle"></i><span id="toastMessage"></span></div>
+
+  <nav id="navbar">
+    <div class="nav-wrap">
+      <a href="#hero" class="nav-logo">
+        <div class="logo-icon"><i class="fas fa-download"></i></div>
+        <span class="logo-text">DownSosmed</span>
+      </a>
+      <div class="nav-links" id="navMenu">
+        <a href="#hero" class="nav-link active">Beranda</a>
+        <a href="#platforms" class="nav-link">Platform</a>
+        <a href="#features" class="nav-link">Fitur</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+      </div>
+      <button id="themeToggle"><i class="fas fa-moon"></i></button>
+      <button id="hamburger"><i class="fas fa-bars"></i></button>
+    </div>
+  </nav>
+
+  <section id="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+      <div class="hero-badge"><span class="badge-dot"></span>Gratis • HD • Tanpa Watermark</div>
+      <h1>Download Media<br/><span class="gradient-text">Sosial Apapun</span></h1>
+      
+      <div class="input-group">
+        <div class="input-box">
+          <i class="fas fa-link input-icon"></i>
+          <input type="url" id="url" placeholder="Tempel link video/foto di sini..." autocomplete="off"/>
+          <button id="clearBtn" class="input-clear" style="display:none;"><i class="fas fa-times"></i></button>
+        </div>
+        <button class="btn-dl" onclick="fetchMedia()">
+          <i class="fas fa-bolt"></i>Download
+        </button>
+      </div>
+
+      <div class="chips">
+        <span class="chip"><i class="fab fa-tiktok"></i>TikTok</span>
+        <span class="chip"><i class="fab fa-instagram"></i>Instagram</span>
+        <span class="chip"><i class="fab fa-youtube"></i>YouTube</span>
+        <span class="chip"><i class="fab fa-facebook"></i>Facebook</span>
+        <span class="chip"><i class="fab fa-twitter"></i>Twitter</span>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-num">20+</span><span class="stat-label">Platform</span></div>
+      <div class="stat-line"></div>
+      <div class="stat"><span class="stat-num">4K</span><span class="stat-label">HD</span></div>
+      <div class="stat-line"></div>
+      <div class="stat"><span class="stat-num">0%</span><span class="stat-label">Watermark</span></div>
+      <div class="stat-line"></div>
+      <div class="stat"><span class="stat-num">∞</span><span class="stat-label">Gratis</span></div>
+    </div>
+  </section>
+
+  <div id="loadingSpinner">
+    <div class="loading-box">
+      <div class="loading-spin"><i class="fas fa-bolt"></i></div>
+      <p id="loadingText">Memuat...</p>
+    </div>
+  </div>
+
+  <section id="result" style="display:none;">
+    <div class="result-box">
+      <button class="result-close" onclick="hideResult()"><i class="fas fa-times"></i></button>
+      <div class="result-head">
+        <span class="result-badge" id="platform"><i class="fas fa-play-circle"></i> Platform</span>
+        <span class="result-author" id="author"></span>
+      </div>
+      <p class="result-title" id="caption"></p>
+      <div id="media-preview" class="media-preview"></div>
+      <div class="dl-btns" id="dl-btns"></div>
+    </div>
+  </section>
+
+  <section id="platforms">
+    <div class="section-wrap">
+      <div class="section-head reveal">
+        <span class="section-badge"><i class="fas fa-th"></i> Platform</span>
+        <h2>Didukung 20+ Platform</h2>
+        <p>Download video, foto & audio!</p>
+      </div>
+      <div class="platform-grid reveal-stagger">
+        <div class="plat-card" style="--c:#ff0050"><i class="fab fa-tiktok"></i><span>TikTok</span></div>
+        <div class="plat-card" style="--c:#e1306c"><i class="fab fa-instagram"></i><span>Instagram</span></div>
+        <div class="plat-card" style="--c:#ff0000"><i class="fab fa-youtube"></i><span>YouTube</span></div>
+        <div class="plat-card" style="--c:#1877f2"><i class="fab fa-facebook"></i><span>Facebook</span></div>
+        <div class="plat-card" style="--c:#1da1f2"><i class="fab fa-twitter"></i><span>Twitter</span></div>
+        <div class="plat-card" style="--c:#e60023"><i class="fab fa-pinterest"></i><span>Pinterest</span></div>
+        <div class="plat-card" style="--c:#ff4500"><i class="fab fa-reddit-alien"></i><span>Reddit</span></div>
+        <div class="plat-card" style="--c:#fffc00"><i class="fab fa-snapchat-ghost"></i><span>Snapchat</span></div>
+        <div class="plat-card" style="--c:#0088cc"><i class="fab fa-telegram"></i><span>Telegram</span></div>
+        <div class="plat-card" style="--c:#25D366"><i class="fab fa-whatsapp"></i><span>WhatsApp</span></div>
+        <div class="plat-card" style="--c:#7289da"><i class="fab fa-discord"></i><span>Discord</span></div>
+        <div class="plat-card" style="--c:#0a66c2"><i class="fab fa-linkedin"></i><span>LinkedIn</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="section-wrap">
+      <div class="section-head reveal">
+        <span class="section-badge"><i class="fas fa-star"></i> Fitur</span>
+        <h2>Kenapa DownSosmed?</h2>
+        <p>Video, Foto & Audio - Semua bisa!</p>
+      </div>
+      <div class="feat-grid reveal-stagger">
+        <div class="feat-card f-purple"><div class="feat-icon"><i class="fas fa-video"></i></div><h3>Download Video</h3><p>Video HD tanpa watermark.</p></div>
+        <div class="feat-card f-blue"><div class="feat-icon"><i class="fas fa-image"></i></div><h3>Download Foto</h3><p>Foto single atau multiple dengan slider.</p></div>
+        <div class="feat-card f-green"><div class="feat-icon"><i class="fas fa-music"></i></div><h3>Download Audio</h3><p>Ekstrak MP3 dari video.</p></div>
+        <div class="feat-card f-amber"><div class="feat-icon"><i class="fas fa-tv"></i></div><h3>Kualitas HD</h3><p>Video hingga 1080p & 4K.</p></div>
+        <div class="feat-card f-pink"><div class="feat-icon"><i class="fas fa-ban"></i></div><h3>Tanpa Watermark</h3><p>Video & foto bersih tanpa logo.</p></div>
+        <div class="feat-card f-cyan"><div class="feat-icon"><i class="fas fa-shield-alt"></i></div><h3>Aman & Privat</h3><p>Tidak menyimpan data.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="section-wrap faq-wrap">
+      <div class="section-head reveal">
+        <span class="section-badge"><i class="fas fa-question-circle"></i> FAQ</span>
+        <h2>Pertanyaan Umum</h2>
+      </div>
+      <div class="faq-list reveal-stagger">
+        <div class="faq-item"><div class="faq-q" onclick="toggleFAQ(this)"><span>Bisa download foto?</span><i class="fas fa-plus"></i></div><div class="faq-a">Ya! Bisa download foto dari Instagram, Twitter, dll. Multiple foto dengan slider.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFAQ(this)"><span>Gratis selamanya?</span><i class="fas fa-plus"></i></div><div class="faq-a">Ya! 100% gratis tanpa batasan.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFAQ(this)"><span>Install aplikasi?</span><i class="fas fa-plus"></i></div><div class="faq-a">Tidak perlu. Langsung di browser!</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFAQ(this)"><span>Platform didukung?</span><i class="fas fa-plus"></i></div><div class="faq-a">TikTok, IG, YouTube, FB, Twitter, Pinterest, dll.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-wrap">
+      <div class="footer-brand">
+        <div class="footer-logo"><div class="logo-sm"><i class="fas fa-download"></i></div><span>DownSosmed</span></div>
+        <p>Download video, foto & audio. Dibuat dengan 💜 oleh <strong>RizkyMaxz</strong></p>
+      </div>
+      <div class="footer-links">
+        <a href="#hero">Beranda</a>
+        <a href="#platforms">Platform</a>
+        <a href="#features">Fitur</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2025 <strong>DownSosmed</strong> • Made with 💜 by <strong>RizkyMaxz</strong></div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
